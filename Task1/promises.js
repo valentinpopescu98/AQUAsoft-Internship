@@ -34,15 +34,16 @@
 // Promise that triggers after an interval:
 
 {
-    const promise = new Promise(resolve => {
+    const promise = new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve('Success');
         }, 1000);
+        return fetch("https://jsonplaceholder.typicode.com/posts1", {method: "GET"});
     });
 
     promise.then(msg => {
         console.log("Message: " + msg);
-    }).catch(() => {
-        console.log("Error");
+    }).catch((err) => {
+        console.log("Error: " + err);
     });
 }
