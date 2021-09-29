@@ -1,15 +1,14 @@
 {
   "name": "task2",
   "version": "1.0.0",
-  "description": "Back-End Project",
+  "description": "Back-End Project 1",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Valentin Popescu",
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
     "mysql2": "^2.3.0",
     "sequelize": "^6.6.5"
   }
