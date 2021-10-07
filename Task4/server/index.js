@@ -1,6 +1,10 @@
 const express = require("express");
+const cors = require("cors");
 
 const app = express();
+
+// use cors
+app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -13,7 +17,8 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to my application." });
 });
 
-require("./routes/use-routes")(app);
+require("./routes/use-routes-employees")(app);
+require("./routes/use-routes-projects")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

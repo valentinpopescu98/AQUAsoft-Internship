@@ -29,6 +29,10 @@ module.exports = (sequelize, Sequelize) => {
       job_title: {
           type: Sequelize.DataTypes.STRING(45),
           notNull: true
+      },
+      projects_id: {
+          type: Sequelize.DataTypes.INTEGER,
+          notNull: true
       }
     }, {
       freezeTableName: true,
