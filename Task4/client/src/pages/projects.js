@@ -24,14 +24,8 @@ const Projects = () => {
 
     const [editContactId, setEditContactId] = useState(null);
 
-    // useEffect(() => {
-    //     return Axios.get("http://localhost:8080/api/projects").then((res) => {
-    //         setContacts(res.data);
-    //     });
-    // }, []);
-
-    const getContacts = () => {
-        Axios.get("http://localhost:8080/api/projects").then((res) => {
+    useEffect(() => {
+        return Axios.get("http://localhost:8080/api/projects").then((res) => {
             for (let i = 0; i < res.data.length; i++) {
                 res.data[i].start_date = res.data[i].start_date.slice(0, 10);
                 res.data[i].planned_end_date = res.data[i].planned_end_date.slice(0, 10);
@@ -39,12 +33,18 @@ const Projects = () => {
 
             setContacts(res.data);
         });
-    }
-
-    useEffect(getContacts, []);
+    }, []);
 
     const addContact = (contact) => {
-        Axios.post("http://localhost:8080/api/projects", contact).then(() => {
+        Axios.post("http://localhost:8080/api/projects", contact).then((res) => {
+            const newContact = res.data;
+
+            newContact.start_date = newContact.start_date.slice(0, 10);
+            newContact.planned_end_date = newContact.planned_end_date.slice(0, 10);
+
+            const newContacts = [...contacts, newContact];
+            setContacts(newContacts);
+
             alert("Succesful insert!");
         });
     }
@@ -100,7 +100,6 @@ const Projects = () => {
         setContacts(newContacts);
 
         addContact(newContact);
-        getContacts();
     }
 
     const handleEditFormSubmit = (event) => {

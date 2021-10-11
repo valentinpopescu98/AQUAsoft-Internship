@@ -28,13 +28,7 @@ const Employees = () => {
 
     const [editContactId, setEditContactId] = useState(null);
 
-    // useEffect(() => {
-    //     Axios.get("http://localhost:8080/api/employees").then((res) => {
-    //         setContacts(res.data);
-    //     });
-    // }, []);
-
-    const getContacts = () => {
+    useEffect(() => {
         Axios.get("http://localhost:8080/api/employees").then((res) => {
             for (let i = 0; i < res.data.length; i++) {
                 res.data[i].hire_date = res.data[i].hire_date.slice(0, 10);
@@ -42,12 +36,17 @@ const Employees = () => {
 
             setContacts(res.data);
         });
-    }
-
-    useEffect(getContacts, []);
+    }, []);
 
     const addContact = (contact) => {
-        Axios.post("http://localhost:8080/api/employees", contact).then(() => {
+        Axios.post("http://localhost:8080/api/employees", contact).then((res) => {
+            const newContact = res.data;
+
+            newContact.hire_date = newContact.hire_date.slice(0, 10);
+
+            const newContacts = [...contacts, newContact];
+            setContacts(newContacts);
+
             alert("Succesful insert!");
         });
     }
@@ -105,7 +104,6 @@ const Employees = () => {
         setContacts(newContacts);
 
         addContact(newContact);
-        getContacts();
     }
 
     const handleEditFormSubmit = (event) => {
