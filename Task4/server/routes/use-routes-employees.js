@@ -1,24 +1,24 @@
 const db = require("../init");
 
 module.exports = app => {
-    const employees = require("./create-routes-employees");
+    const routes = require("./create-routes-employees");
   
     var router = require("express").Router();
 
     // Retrieve all Employees
-    router.get("/", employees.findAll);
+    router.get("/", routes.findAll);
 
     // Retrieve a single Employee with name
-    router.get("/:name", employees.findOne);
+    router.get("/:name", routes.findOne);
 
     // Create a new Employee
-    router.post("/", employees.create);
+    router.post("/", routes.create);
 
     // Update an Employee by id
-    router.put("/:id", employees.update);
+    router.put("/:id", routes.update);
 
     // Delete an Employee by id
-    router.delete("/:id", employees.delete);
+    router.delete("/:id", routes.delete);
     
     app.use('/api/employees', router);
   };

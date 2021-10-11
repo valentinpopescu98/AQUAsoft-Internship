@@ -1,8 +1,9 @@
 import React from 'react'
 
-const ProjectsEditableRow = ({ editFormData, handleEditFormChange, handleCancelClick }) => {
+const ProjectsEditableRow = ({ contact, editFormData, handleEditFormChange, handleCancelClick }) => {
     return (
         <tr>
+            <td>{contact.id}</td>
             <td>
                 <input type="text" name="project_name" required="required" placeholder="Enter a name." value={editFormData.project_name} onChange={handleEditFormChange} />
             </td>

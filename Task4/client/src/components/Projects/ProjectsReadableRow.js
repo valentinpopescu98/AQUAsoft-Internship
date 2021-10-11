@@ -3,6 +3,7 @@ import React from 'react'
 const ProjectsReadableRow = ({ contact, handleEditClick, handleDeleteClick }) => {
     return (
         <tr>
+            <td>{contact.id}</td>
             <td>{contact.project_name}</td>
             <td>{contact.start_date}</td>
             <td>{contact.planned_end_date}</td>

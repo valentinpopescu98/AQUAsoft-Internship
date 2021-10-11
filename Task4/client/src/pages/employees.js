@@ -1,5 +1,4 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { nanoid } from 'nanoid'
 import Axios from "axios";
 import "./table.css";
 import EmployeesReadableRow from '../components/Employees/EmployeesReadableRow';
@@ -29,11 +28,23 @@ const Employees = () => {
 
     const [editContactId, setEditContactId] = useState(null);
 
-    useEffect(() => {
+    // useEffect(() => {
+    //     Axios.get("http://localhost:8080/api/employees").then((res) => {
+    //         setContacts(res.data);
+    //     });
+    // }, []);
+
+    const getContacts = () => {
         Axios.get("http://localhost:8080/api/employees").then((res) => {
+            for (let i = 0; i < res.data.length; i++) {
+                res.data[i].hire_date = res.data[i].hire_date.slice(0, 10);
+            }
+
             setContacts(res.data);
         });
-    }, []);
+    }
+
+    useEffect(getContacts, []);
 
     const addContact = (contact) => {
         Axios.post("http://localhost:8080/api/employees", contact).then(() => {
@@ -81,7 +92,6 @@ const Employees = () => {
         event.preventDefault();
 
         const newContact = {
-            id: nanoid(),
             name: addFormData.name,
             address: addFormData.address,
             email: addFormData.email,
@@ -95,6 +105,7 @@ const Employees = () => {
         setContacts(newContacts);
 
         addContact(newContact);
+        getContacts();
     }
 
     const handleEditFormSubmit = (event) => {
@@ -127,11 +138,13 @@ const Employees = () => {
         event.preventDefault();
         setEditContactId(contact.id);
 
+        const hireDateConverted = contact.hire_date.slice(0, 10);
+
         const formValues = {
             name: contact.name,
             address: contact.address,
             email: contact.email,
-            hire_date: contact.hire_date,
+            hire_date: hireDateConverted,
             salary: contact.salary,
             job_title: contact.job_title,
             projects_id: contact.projects_id
@@ -162,6 +175,7 @@ const Employees = () => {
                 <table>
                     <thead>
                         <tr>
+                            <th>Id</th>
                             <th>Name</th>
                             <th>Address</th>
                             <th>Email</th>
@@ -176,7 +190,7 @@ const Employees = () => {
                         {contacts.map((contact) => (
                             <Fragment>
                                 { editContactId === contact.id ? 
-                                <EmployeesEditableRow editFormData={editFormData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick} /> : 
+                                <EmployeesEditableRow contact={contact} editFormData={editFormData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick} /> : 
                                 <EmployeesReadableRow contact={contact} handleEditClick={handleEditClick} handleDeleteClick={handleDeleteClick} />}
                             </Fragment>
                         ))}

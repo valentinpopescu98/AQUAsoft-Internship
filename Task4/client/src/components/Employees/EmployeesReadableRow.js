@@ -3,6 +3,7 @@ import React from 'react'
 const EmployeesReadableRow = ({ contact, handleEditClick, handleDeleteClick }) => {
     return (
         <tr>
+            <td>{contact.id}</td>
             <td>{contact.name}</td>
             <td>{contact.address}</td>
             <td>{contact.email}</td>

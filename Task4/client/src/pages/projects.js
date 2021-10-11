@@ -1,5 +1,4 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { nanoid } from 'nanoid'
 import Axios from "axios";
 import './table.css';
 import ProjectsReadableRow from '../components/Projects/ProjectsReadableRow';
@@ -8,7 +7,6 @@ import ProjectsEditableRow from '../components/Projects/ProjectsEditableRow';
 const Projects = () => {
     const [contacts, setContacts] = useState([]);
     const [addFormData, setAddFormData] = useState({
-        id: 1,
         project_name: '',
         start_date: '',
         planned_end_date: '',
@@ -17,7 +15,6 @@ const Projects = () => {
     });
 
     const [editFormData, setEditFormData] = useState({
-        id: 1,
         project_name: '',
         start_date: '',
         planned_end_date: '',
@@ -27,11 +24,24 @@ const Projects = () => {
 
     const [editContactId, setEditContactId] = useState(null);
 
-    useEffect(() => {
+    // useEffect(() => {
+    //     return Axios.get("http://localhost:8080/api/projects").then((res) => {
+    //         setContacts(res.data);
+    //     });
+    // }, []);
+
+    const getContacts = () => {
         Axios.get("http://localhost:8080/api/projects").then((res) => {
+            for (let i = 0; i < res.data.length; i++) {
+                res.data[i].start_date = res.data[i].start_date.slice(0, 10);
+                res.data[i].planned_end_date = res.data[i].planned_end_date.slice(0, 10);
+            }
+
             setContacts(res.data);
         });
-    }, []);
+    }
+
+    useEffect(getContacts, []);
 
     const addContact = (contact) => {
         Axios.post("http://localhost:8080/api/projects", contact).then(() => {
@@ -79,7 +89,6 @@ const Projects = () => {
         event.preventDefault();
 
         const newContact = {
-            id: nanoid(),
             project_name: addFormData.project_name,
             start_date: addFormData.start_date,
             planned_end_date: addFormData.planned_end_date,
@@ -90,8 +99,8 @@ const Projects = () => {
         const newContacts = [...contacts, newContact];
         setContacts(newContacts);
 
-        console.log(newContact);
         addContact(newContact);
+        getContacts();
     }
 
     const handleEditFormSubmit = (event) => {
@@ -122,10 +131,14 @@ const Projects = () => {
         event.preventDefault();
         setEditContactId(contact.id);
 
+        const startDateConverted = contact.start_date.slice(0, 10);
+        const endDateConverted = contact.planned_end_date.slice(0, 10);
+
         const formValues = {
+            id: contact.id,
             project_name: contact.project_name,
-            start_date: contact.start_date,
-            planned_end_date: contact.planned_end_date,
+            start_date: startDateConverted,
+            planned_end_date: endDateConverted,
             description: contact.description,
             project_code: contact.project_code
         }
@@ -155,6 +168,7 @@ const Projects = () => {
                 <table>
                     <thead>
                         <tr>
+                            <th>Id</th>
                             <th>Project Name</th>
                             <th>Start Date</th>
                             <th>Planned End Date</th>
@@ -167,7 +181,7 @@ const Projects = () => {
                         {contacts.map((contact) => (
                             <Fragment>
                                 { editContactId === contact.id ? 
-                                <ProjectsEditableRow editFormData={editFormData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick} /> : 
+                                <ProjectsEditableRow contact={contact} editFormData={editFormData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick} /> : 
                                 <ProjectsReadableRow contact={contact} handleEditClick={handleEditClick} handleDeleteClick={handleDeleteClick} />}
                             </Fragment>
                         ))}

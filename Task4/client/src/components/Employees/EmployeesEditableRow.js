@@ -1,8 +1,9 @@
 import React from 'react'
 
-const EmployeesEditableRow = ({ editFormData, handleEditFormChange, handleCancelClick }) => {
+const EmployeesEditableRow = ({ contact, editFormData, handleEditFormChange, handleCancelClick }) => {
     return (
         <tr>
+            <td>{contact.id}</td>
             <td>
                 <input type="text" name="name" required="required" placeholder="Enter a name." value={editFormData.name} onChange={handleEditFormChange} />
             </td>
