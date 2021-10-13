@@ -17,12 +17,6 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.projects = require("./models/projects")(sequelize, Sequelize);
-db.employees = require("./models/employees")(sequelize, Sequelize);
-
-db.employees.belongsTo(db.projects, {
-  targetKey: "id",
-  foreignKey: "projects_id"
-});
+db.accounts = require("./models/accounts")(sequelize, Sequelize);
 
 module.exports = db;
