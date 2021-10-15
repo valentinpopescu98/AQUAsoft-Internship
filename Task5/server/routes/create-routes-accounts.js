@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const db = require("../init");
+const jwt = require('jsonwebtoken');
 const Accounts = db.accounts;
 
 // Retrieve all Accounts from the database
@@ -16,7 +17,7 @@ exports.findAll = (res) => {
 };
 
 // Retrieve an Account by username and check if the password is correct
-exports.findOne = async(req, res) => {
+exports.findOne = (req, res) => {
   const username = req.params.username;
   const password = req.params.password;
 
@@ -24,8 +25,21 @@ exports.findOne = async(req, res) => {
     where: {username: username}
   })
     .then(data => {
-      const checkPassword = bcrypt.compareSync(password, data.password);
-      res.send(checkPassword);
+      try {
+        const checkPassword = bcrypt.compareSync(password, data.password);
+        const token = jwt.sign({id: data.id}, 'RANDOM_TOKEN_SECRET', {expiresIn: '24h'});
+        res.cookie('jwt', token, {httpOnly: true, maxAge: 60 * 60 * 24});
+        res.send({
+          id: data.id,
+          // token: token,
+          checkPassword: checkPassword
+        });
+      }
+      catch(err) {
+        res.status(400).send({
+          message: err.message
+        });
+      }
     })
     .catch(err => {
       res.status(500).send({

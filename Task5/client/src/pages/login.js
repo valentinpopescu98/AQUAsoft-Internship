@@ -12,16 +12,16 @@ const Login = () => {
 
     useEffect(() => {
         if(localStorage.getItem('loggedIn') === 'true') {
-            history.push("/home");
+            history.push("/employees");
         }
     });
 
     const getContact = (username, password) => {
         Axios.get(`http://localhost:8080/api/accounts/${username}&${password}`).then((res) => {
-            if(res.data) {
+            if(res.data.checkPassword) {
                 alert("Succesful login!");
                 localStorage.setItem('loggedIn', true);
-                history.push("/home");
+                history.push("/employees");
             }
             else {
                 alert("Wrong username or password!");

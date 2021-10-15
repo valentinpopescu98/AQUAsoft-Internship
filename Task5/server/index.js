@@ -17,7 +17,11 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to my application." });
 });
 
-require("./routes/use-routes")(app);
+// require("./middleware/protect-routes")(app);
+
+require("./routes/use-routes-accounts")(app);
+require("./routes/use-routes-employees")(app);
+require("./routes/use-routes-projects")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

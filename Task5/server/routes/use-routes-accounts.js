@@ -1,7 +1,7 @@
 const db = require("../init");
 
 module.exports = app => {
-    const routes = require("./create-routes");
+    const routes = require("./create-routes-accounts");
   
     var router = require("express").Router();
 

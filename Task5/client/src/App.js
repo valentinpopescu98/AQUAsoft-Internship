@@ -2,7 +2,8 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./pages/login";
 import Register from "./pages/register";
-import Home from "./pages/home";
+import Employees from "./pages/employees";
+import Projects from "./pages/projects";
 
 function App() {
   return (
@@ -10,7 +11,8 @@ function App() {
       <Switch>
         <Route path="/" component={Login} exact />
         <Route path="/register" component={Register} exact />
-        <Route path="/home" component={Home} exact />
+        <Route path="/employees" component={Employees} />
+        <Route path="/projects" component={Projects} />
       </Switch>
     </Router>
   );
