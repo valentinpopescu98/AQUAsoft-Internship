@@ -1,8 +1,8 @@
 # aquasoft-internship
 Tasks I solved during my AQUAsoft internship:
 
-Task 1:
-This task is to learn / recap some basic notions of JavaScript that are used in our projects.
+**Task 1:
+This task is to learn / recap some basic notions of JavaScript that are used in our projects.**
 
 1. ES6 methods - go through each one and what each one entails;
 2. The difference between var, let, const;
@@ -13,8 +13,8 @@ This task is to learn / recap some basic notions of JavaScript that are used in 
 7. Async, await;
 8. Closures.
 
-Task 2:
-The back-end task consists in creating an Express project with the following requirements:
+**Task 2:
+The back-end task consists in creating an Express project with the following requirements:**
 
 1. Install node, npm, express, mysql and all related packages;
 2. Creating a database consisting of 1 table (for MySQL), with the below structure;
@@ -41,8 +41,8 @@ Columns / Fields:
 * Salary int
 * Job_Title varchar(45)
 
-Task 3:
-The new back-end task consists in creating an Express project that handles operations with multiple related databases.
+**Task 3:
+The new back-end task consists in creating an Express project that handles operations with multiple related databases.**
 
 A new "Projects" table will be added to the existing database. Using this table, we will create:
 * 1 GET / queries route (extracting all elements from the project table),
@@ -62,8 +62,8 @@ Columns / Fields:
 * Description varchar(45)
 * Project_code varchar(45)
 
-Task 4:
-This task involves creating a React (+ Redux) application.
+**Task 4:
+This task involves creating a React (+ Redux) application.**
 
 The application must include 2 pages. The first page will contain a table with all the employees from the database, while the second will contain a table with all the existing projects.
 On each table it will be possible to perform the following operations: add, update, delete (either through adjacent dialogs, or directly on the table).
@@ -71,8 +71,8 @@ Navigation between pages will be done using a navbar (routing).
 CSS will also be added to make the application prettier.
 To connect the frontend and the backend, you will use CORS.
 
-Task 5:
-This task combines the previous tasks in a single app.
+**Task 5:
+This task combines the previous tasks in a single app.**
 
 1. A new "Accounts" table will be added to the existing database. Using this table, we will create:
 * 1 GET / queries route (log into an existing account by the username and the password),
