@@ -2,7 +2,7 @@
 Tasks I solved during my AQUAsoft internship:
 
 Task 1:
-Today's task is to learn / recap some basic notions of JavaScript that are used in our projects.
+This task is to learn / recap some basic notions of JavaScript that are used in our projects.
 
 1. ES6 methods - go through each one and what each one entails;
 2. The difference between var, let, const;
@@ -42,6 +42,8 @@ Columns / Fields:
 * Job_Title varchar(45)
 
 Task 3:
+The new back-end task consists in creating an Express project that handles operations with multiple related databases.
+
 A new "Projects" table will be added to the existing database. Using this table, we will create:
 * 1 GET / queries route (extracting all elements from the project table),
 * 1 POST / mutation route (insertion of a new project),
@@ -62,6 +64,7 @@ Columns / Fields:
 
 Task 4:
 This task involves creating a React (+ Redux) application.
+
 The application must include 2 pages. The first page will contain a table with all the employees from the database, while the second will contain a table with all the existing projects.
 On each table it will be possible to perform the following operations: add, update, delete (either through adjacent dialogs, or directly on the table).
 Navigation between pages will be done using a navbar (routing).
@@ -70,6 +73,7 @@ To connect the frontend and the backend, you will use CORS.
 
 Task 5:
 This task combines the previous tasks in a single app.
+
 1. A new "Accounts" table will be added to the existing database. Using this table, we will create:
 * 1 GET / queries route (log into an existing account by the username and the password),
 * 1 POST / mutation route (create a new account);
