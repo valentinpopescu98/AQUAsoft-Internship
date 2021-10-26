@@ -90,7 +90,7 @@ exports.update = (req, res) => {
     });
 };
 
-// Delete an Project with the specified id in the request
+// Delete a Project with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
 
