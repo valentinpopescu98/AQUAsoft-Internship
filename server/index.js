@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to my application." });
 });
 
-// require("./middleware/protect-routes")(app);
+require("./middleware/protect-routes")(app);
 
 require("./routes/use-routes-accounts")(app);
 require("./routes/use-routes-employees")(app);
