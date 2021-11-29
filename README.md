@@ -1,4 +1,4 @@
-# aquasoft-internship
+# Database Online Administrator
 Tasks I solved during my AQUAsoft internship:
 
 **Task 1:
