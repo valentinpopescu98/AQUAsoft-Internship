@@ -21,6 +21,7 @@ The back-end task consists in creating an Express project with the following req
 3. Inserting test data in the database (MySQL Workbench for MySQL);
 
 For the REST API with Express:
+
 4. Creation of the Express project to access the database using the sequelize module (for MySQL);
 5. Creation of REST services for the "Employees" table:
 * 2 GET routes (extraction of all elements from the table of employees / of a single employee by name),
