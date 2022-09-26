@@ -44,7 +44,7 @@ const Employees = () => {
 
             setContacts(res.data);
         });
-    });
+    }, []);
 
     const addContact = (contact) => {
         Axios.post("http://localhost:8080/api/employees", contact).then((res) => {

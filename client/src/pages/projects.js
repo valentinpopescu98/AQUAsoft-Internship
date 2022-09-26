@@ -41,7 +41,7 @@ const Projects = () => {
 
             setContacts(res.data);
         });
-    });
+    }, []);
 
     const addContact = (contact) => {
         Axios.post("http://localhost:8080/api/projects", contact).then((res) => {
