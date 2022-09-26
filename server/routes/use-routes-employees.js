@@ -1,24 +1,25 @@
 const db = require("../init");
 
 module.exports = app => {
+    const auth = require('../middleware/auth');
     const routes = require("./create-routes-employees");
   
     var router = require("express").Router();
 
     // Retrieve all Employees
-    router.get("/", routes.findAll);
+    router.get("/", auth, routes.findAll);
 
     // Retrieve a single Employee with name
-    router.get("/:name", routes.findOne);
+    router.get("/:name", auth, routes.findOne);
 
     // Create a new Employee
-    router.post("/", routes.create);
+    router.post("/", auth, routes.create);
 
     // Update an Employee by id
-    router.put("/:id", routes.update);
+    router.put("/:id", auth, routes.update);
 
     // Delete an Employee by id
-    router.delete("/:id", routes.delete);
+    router.delete("/:id", auth, routes.delete);
     
     app.use('/api/employees', router);
   };

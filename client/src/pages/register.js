@@ -11,7 +11,7 @@ const Register = () => {
     });
 
     const addContact = (contact) => {
-        Axios.post("http://localhost:8080/api/accounts", contact).then((res) => {
+        Axios.post("http://localhost:8080/api/register", contact).then((res) => {
             const newContact = res.data;
 
             const newContacts = [...contacts, newContact];

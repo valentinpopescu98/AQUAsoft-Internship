@@ -1,10 +1,26 @@
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
 // use cors
-app.use(cors());
+app.use(cors({
+  origin: true,
+  credentials: true,
+}));
+
+// prevent CORS problems
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Headers', 'Origin, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, X-Response-Time, X-PINGOTHER, X-CSRF-Token, Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Credentials', true);
+  next();
+});
+
+// parse cookies
+app.use(cookieParser());
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -16,8 +32,6 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to my application." });
 });
-
-require("./middleware/protect-routes")(app);
 
 require("./routes/use-routes-accounts")(app);
 require("./routes/use-routes-employees")(app);

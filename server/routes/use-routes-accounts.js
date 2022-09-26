@@ -5,20 +5,14 @@ module.exports = app => {
   
     var router = require("express").Router();
 
-    // Retrieve all Accounts
-    router.get("/", routes.findAll);
-
     // Retrieve an Account by username and check if the password is correct
-    router.get("/:username&:password", routes.findOne);
+    // router.get("/:username&:password", routes.findOne);
 
     // Create a new Account
-    router.post("/", routes.create);
+    router.post("/register", routes.create);
 
-    // Update an Account by id
-    router.put("/:id", routes.update);
-
-    // Delete an Account by id
-    router.delete("/:id", routes.delete);
+    // Log In
+    router.post("/login", routes.login);
     
-    app.use('/api/accounts', router);
+    app.use('/api', router);
   };

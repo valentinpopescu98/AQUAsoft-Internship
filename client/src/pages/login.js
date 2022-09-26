@@ -16,8 +16,21 @@ const Login = () => {
         }
     });
 
+    const login = (credentials) => {
+        Axios.post("http://localhost:8080/api/login", credentials).then((res) => {
+            if (res.data.checkPassword) {
+                alert("Succesful login!");
+                localStorage.setItem('loggedIn', true);
+                history.push("/employees");
+            }
+            else {
+                alert("Wrong username or password!");
+            }
+        });
+    }
+
     const getContact = (username, password) => {
-        Axios.get(`http://localhost:8080/api/accounts/${username}&${password}`).then((res) => {
+        Axios.get(`http://localhost:8080/api/${username}&${password}`).then((res) => {
             if(res.data.checkPassword) {
                 alert("Succesful login!");
                 localStorage.setItem('loggedIn', true);
@@ -49,7 +62,9 @@ const Login = () => {
             password: addFormData.password
         }
 
-        getContact(loggedContact.username, loggedContact.password);
+        // login(loggedContact.username, loggedContact.password);
+        // getContact(loggedContact.username, loggedContact.password);
+        login(loggedContact);
     }
 
     return (
