@@ -11,35 +11,21 @@ const Login = () => {
     });
 
     useEffect(() => {
-        if(localStorage.getItem('loggedIn') === 'true') {
+        if (localStorage.getItem('loggedIn') === 'true') {
             history.push("/employees");
         }
-    });
+    }, [history]);
 
     const login = (credentials) => {
         Axios.post("http://localhost:8080/api/login", credentials).then((res) => {
-            if (res.data.checkPassword) {
-                alert("Succesful login!");
-                localStorage.setItem('loggedIn', true);
-                history.push("/employees");
-            }
-            else {
-                alert("Wrong username or password!");
-            }
-        });
-    }
-
-    const getContact = (username, password) => {
-        Axios.get(`http://localhost:8080/api/${username}&${password}`).then((res) => {
-            if(res.data.checkPassword) {
-                alert("Succesful login!");
-                localStorage.setItem('loggedIn', true);
-                history.push("/employees");
-            }
-            else {
-                alert("Wrong username or password!");
-            }
+            alert("Succesful login!");
+            
+            localStorage.setItem('loggedIn', true);
+            history.push("/employees");
         })
+        .catch(err => {
+            alert(err.response.data.message);
+        });
     }
 
     const handleLoginChange = (event) => {
@@ -62,8 +48,6 @@ const Login = () => {
             password: addFormData.password
         }
 
-        // login(loggedContact.username, loggedContact.password);
-        // getContact(loggedContact.username, loggedContact.password);
         login(loggedContact);
     }
 

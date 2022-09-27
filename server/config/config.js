@@ -9,6 +9,8 @@ module.exports = {
     MIN: 0,
     ACQUIRE: 30000,
     IDLE: 10000
-  }
+  },
+
+  JWT_SECRET: "SECRET"
 };
   

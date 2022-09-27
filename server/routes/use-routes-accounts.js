@@ -5,14 +5,11 @@ module.exports = app => {
   
     var router = require("express").Router();
 
-    // Retrieve an Account by username and check if the password is correct
-    // router.get("/:username&:password", routes.findOne);
-
     // Create a new Account
     router.post("/register", routes.create);
 
-    // Log In
-    router.post("/login", routes.login);
+    // Retrieve an Account by username and check if the password is correct
+    router.post("/login", routes.findOne);
     
     app.use('/api', router);
   };

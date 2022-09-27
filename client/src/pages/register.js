@@ -1,14 +1,23 @@
-import { Link } from "react-router-dom";
-import React, { useState } from 'react'
+import { Link, useHistory } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
 import Axios from "axios";
 
 const Register = () => {
+    let history = useHistory();
+
     const [contacts, setContacts] = useState([]);
     const [addFormData, setAddFormData] = useState({
         username: '',
         password: '',
+        repeatPassword: '',
         email: ''
     });
+
+    useEffect(() => {
+        if (localStorage.getItem('loggedIn') === 'true') {
+            history.push("/employees");
+        }
+    }, [history]);
 
     const addContact = (contact) => {
         Axios.post("http://localhost:8080/api/register", contact).then((res) => {
@@ -18,6 +27,11 @@ const Register = () => {
             setContacts(newContacts);
 
             alert("Account created!");
+
+            history.push("/");
+        })
+        .catch(err => {
+            alert(err.response.data.message);
         });
     }
 
@@ -39,6 +53,7 @@ const Register = () => {
         const newContact = {
             username: addFormData.username,
             password: addFormData.password,
+            repeatPassword: addFormData.repeatPassword,
             email: addFormData.email
         }
 
@@ -55,7 +70,10 @@ const Register = () => {
                     <input type="text" name="username" required="required" placeholder="Username" onChange={handleAddFormChange}/>
                 </div>
                 <div>
-                    <input type="text" name="password" required="required" placeholder="Password" onChange={handleAddFormChange}/>
+                    <input type="password" name="password" required="required" placeholder="Password" onChange={handleAddFormChange}/>
+                </div>
+                <div>
+                    <input type="password" name="repeatPassword" required="required" placeholder="Repeat Password" onChange={handleAddFormChange}/>
                 </div>
                 <div>
                     <input type="email" name="email" required="required" placeholder="Email" onChange={handleAddFormChange}/>

@@ -33,7 +33,7 @@ const Employees = () => {
     const [editContactId, setEditContactId] = useState(null);
 
     useEffect(() => {
-        if(localStorage.getItem('loggedIn') !== 'true') {
+        if (localStorage.getItem('loggedIn') === 'false') {
             history.push("/");
         }
 
@@ -44,7 +44,7 @@ const Employees = () => {
 
             setContacts(res.data);
         });
-    }, []);
+    }, [history]);
 
     const addContact = (contact) => {
         Axios.post("http://localhost:8080/api/employees", contact).then((res) => {
