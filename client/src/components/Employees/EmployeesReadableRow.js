@@ -10,7 +10,7 @@ const EmployeesReadableRow = ({ contact, handleEditClick, handleDeleteClick }) =
             <td>{contact.hire_date}</td>
             <td>{contact.salary}</td>
             <td>{contact.job_title}</td>
-            <td>{contact.projects_id}</td>
+            <td>{contact.project_id}</td>
             <td>
                 <button type="button" onClick={(event) => handleEditClick(event, contact)}>Edit</button>
                 <button type="button" onClick={() => handleDeleteClick(contact.id)}>Delete</button>

@@ -55,10 +55,10 @@ const Login = () => {
         <div className="center-screen">
             <form onSubmit={handleLoginSubmit}>
                 <div>
-                    <input type="text" name="username" required="required" placeholder="Username" onChange={handleLoginChange}/>
+                    <input type="text" name="username" placeholder="Username" onChange={handleLoginChange} required/>
                 </div>
                 <div>
-                    <input type="password" name="password" required="required" placeholder="Password" onChange={handleLoginChange}/>
+                    <input type="password" name="password" placeholder="Password" onChange={handleLoginChange} required/>
                 </div>
                 <div>
                     <button type="submit">Log In</button>

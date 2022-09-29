@@ -36,9 +36,11 @@ exports.findOne = async(req, res) => {
           return;
         }
 
+        // create token with user and pass payload, expires in 24h
         const token = jwt.sign({username: data.username, password: data.password}, JWT_SECRET, {expiresIn: '24h'});
         
-        res.cookie('jwt', token, {httpOnly: true, maxAge: 60 * 60 * 24});
+        // create cookie with token, expires in 24h = 1000ms * 3600s * 24h
+        res.cookie('jwt', token, {httpOnly: true, maxAge: 1000 * 3600 * 24});
         res.send(token);
       }
       catch(err) {

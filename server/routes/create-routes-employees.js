@@ -33,6 +33,8 @@ exports.findAll = (req, res) => {
   
   // Insert a new Employee
   exports.create = (req, res) => {
+    req.body.project_id = parseInt(req.body.project_id) || null;
+
     // Validate request
     if (!req.body.name) {
         console.log(req.body);
@@ -50,7 +52,7 @@ exports.findAll = (req, res) => {
       hire_date: req.body.hire_date,
       salary: req.body.salary,
       job_title: req.body.job_title,
-      projects_id: req.body.projects_id
+      project_id: req.body.project_id
     };
   
     // Save Employee in the database
@@ -67,50 +69,51 @@ exports.findAll = (req, res) => {
   
   // Update an Employee by the id in the request
   exports.update = (req, res) => {
-  const id = req.params.id;
+    const id = req.params.id;
+    req.body.project_id = parseInt(req.body.project_id) || null;
   
-  Employees.update(req.body, {
-    where: { id: id }
-  })
-    .then(num => {
-      if (num == 1) {
-        res.send({
-          message: "Employee was updated successfully."
-        });
-      } else {
-        res.send({
-          message: `Cannot update Employee with id=${id}. Maybe Employee was not found or req.body is empty!`
-        });
-      }
+    Employees.update(req.body, {
+      where: { id: id }
     })
-    .catch(err => {
-      res.status(500).send({
-        message: "Error updating Employee with id=" + id
+      .then(num => {
+        if (num == 1) {
+          res.send({
+            message: "Employee was updated successfully."
+          });
+        } else {
+          res.send({
+            message: `Cannot update Employee with id ${id}. Maybe Employee was not found or req.body is empty!`
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: `Error updating Employee with id ${id}`
+        });
       });
-    });
   };
   
   // Delete an Employee with the specified id in the request
   exports.delete = (req, res) => {
-  const id = req.params.id;
+    const id = req.params.id;
   
-  Employees.destroy({
-    where: { id: id }
-  })
-    .then(num => {
-      if (num == 1) {
-        res.send({
-          message: "Employee was deleted successfully!"
-        });
-      } else {
-        res.send({
-          message: `Cannot delete Employee with id=${id}. Maybe Employee was not found!`
-        });
-      }
+    Employees.destroy({
+      where: { id: id }
     })
-    .catch(err => {
-      res.status(500).send({
-        message: "Could not delete Employee with id=" + id
+      .then(num => {
+        if (num == 1) {
+          res.send({
+            message: "Employee was deleted successfully!"
+          });
+        } else {
+          res.send({
+            message: `Cannot delete Employee with id=${id}. Maybe Employee was not found!`
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Could not delete Employee with id=" + id
+        });
       });
-    });
   };

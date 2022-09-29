@@ -33,13 +33,21 @@ const Projects = () => {
             history.push("/");
         }
 
-        return Axios.get("http://localhost:8080/api/projects").then((res) => {
+        Axios.get("http://localhost:8080/api/projects").then((res) => {
             for (let i = 0; i < res.data.length; i++) {
                 res.data[i].start_date = res.data[i].start_date.slice(0, 10);
                 res.data[i].planned_end_date = res.data[i].planned_end_date.slice(0, 10);
             }
 
             setContacts(res.data);
+        })
+        .catch(err => {
+            if (err.response.status === 403) {
+                localStorage.setItem('loggedIn', false);
+                history.push("/");
+            }
+
+            alert(err.response.data);
         });
     }, [history]);
 
@@ -193,24 +201,24 @@ const Projects = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {contacts.map((contact) => (
+                        {contacts.map(contact => 
                             <Fragment>
                                 { editContactId === contact.id ? 
                                 <ProjectsEditableRow contact={contact} editFormData={editFormData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick} /> : 
                                 <ProjectsReadableRow contact={contact} handleEditClick={handleEditClick} handleDeleteClick={handleDeleteClick} />}
                             </Fragment>
-                        ))}
+                        )}
                     </tbody>
                 </table>
             </form>
 
             <h2>Add a row</h2>
             <form onSubmit={handleAddFormSubmit} className="table-form">
-                <input type="text" name="project_name" required="required" placeholder="Enter a name." onChange={handleAddFormChange} />
-                <input type="date" name="start_date" required="required" placeholder="Enter a date of start." onChange={handleAddFormChange} />
-                <input type="date" name="planned_end_date" required="required" placeholder="Enter a date of end." onChange={handleAddFormChange} />
-                <input type="text" name="description" required="required" placeholder="Enter a description." onChange={handleAddFormChange} />
-                <input type="text" name="project_code" required="required" placeholder="Enter the code." onChange={handleAddFormChange} />
+                <input type="text" name="project_name" placeholder="Enter a name." onChange={handleAddFormChange} required/>
+                <input type="date" name="start_date" placeholder="Enter a date of start." onChange={handleAddFormChange} required/>
+                <input type="date" name="planned_end_date" placeholder="Enter a date of end." onChange={handleAddFormChange} required/>
+                <input type="text" name="description" placeholder="Enter a description." onChange={handleAddFormChange} required/>
+                <input type="text" name="project_code" placeholder="Enter the code." onChange={handleAddFormChange} required/>
                 <button type="submit">Add</button>
             </form>
             

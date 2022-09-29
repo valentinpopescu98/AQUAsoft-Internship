@@ -67,16 +67,16 @@ const Register = () => {
         <div className="center-screen">
             <form onSubmit={handleAddFormSubmit}>
                 <div>
-                    <input type="text" name="username" required="required" placeholder="Username" onChange={handleAddFormChange}/>
+                    <input type="text" name="username" placeholder="Username" onChange={handleAddFormChange} required/>
                 </div>
                 <div>
-                    <input type="password" name="password" required="required" placeholder="Password" onChange={handleAddFormChange}/>
+                    <input type="password" name="password" placeholder="Password" onChange={handleAddFormChange} required/>
                 </div>
                 <div>
-                    <input type="password" name="repeatPassword" required="required" placeholder="Repeat Password" onChange={handleAddFormChange}/>
+                    <input type="password" name="repeatPassword" placeholder="Repeat Password" onChange={handleAddFormChange} required/>
                 </div>
                 <div>
-                    <input type="email" name="email" required="required" placeholder="Email" onChange={handleAddFormChange}/>
+                    <input type="email" name="email" placeholder="Email" onChange={handleAddFormChange} required/>
                 </div>
                 <div>
                     <button type="submit">Register</button>
