@@ -191,7 +191,7 @@ const Projects = () => {
                 <table>
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>ID</th>
                             <th>Project Name</th>
                             <th>Start Date</th>
                             <th>Planned End Date</th>
@@ -212,19 +212,21 @@ const Projects = () => {
                 </table>
             </form>
 
-            <h2>Add a row</h2>
-            <form onSubmit={handleAddFormSubmit} className="table-form">
-                <input type="text" name="project_name" placeholder="Enter a name." onChange={handleAddFormChange} required/>
-                <input type="date" name="start_date" placeholder="Enter a date of start." onChange={handleAddFormChange} required/>
-                <input type="date" name="planned_end_date" placeholder="Enter a date of end." onChange={handleAddFormChange} required/>
-                <input type="text" name="description" placeholder="Enter a description." onChange={handleAddFormChange} required/>
-                <input type="text" name="project_code" placeholder="Enter the code." onChange={handleAddFormChange} required/>
-                <button type="submit">Add</button>
-            </form>
+            <div className="add-form">
+                <h2>Add a row</h2>
+                <form onSubmit={handleAddFormSubmit}>
+                    <input type="text" name="project_name" placeholder="Enter a name." onChange={handleAddFormChange} required/>
+                    <input type="date" name="start_date" placeholder="Enter a date of start." onChange={handleAddFormChange} required/>
+                    <input type="date" name="planned_end_date" placeholder="Enter a date of end." onChange={handleAddFormChange} required/>
+                    <input type="text" name="description" placeholder="Enter a description." onChange={handleAddFormChange} required/>
+                    <input type="text" name="project_code" placeholder="Enter the code." onChange={handleAddFormChange} required/>
+                    <button type="submit">Add</button>
+                </form>
+            </div>
             
             <form onSubmit={handleLogoutSubmit}>
                 <div>
-                    <button type="submit">Log Out</button>
+                    <button type="submit" className="center-horizontally">Log Out</button>
                 </div>
             </form>
         </div>

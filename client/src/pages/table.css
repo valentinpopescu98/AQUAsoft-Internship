@@ -7,35 +7,66 @@
   
 table {
   border-collapse: collapse;
-  width: 100%;
+  width: 95%;
+  /* margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px; */
+  border: 5px solid black;
 }
 
-th,
-td {
-  border: 1px solid #ffffff;
-  text-align: left;
+th, td {
+  text-align: center;
   padding: 8px;
   font-size: 32px;
+  border: 1px solid black;
 }
 
 th {
-  background-color: rgb(117, 201, 250);
+  background-color: #75c9fa;
 }
 
 td {
-  background-color: rgb(205, 235, 253);
+  background-color: #cdebfd;
 }
 
+/* td input {
+  background-color: antiquewhite;
+} */
+
 form td:last-child {
-  display: flex;
-  justify-content: space-evenly;
+  white-space: nowrap;
+}
+
+form td:last-child button {
+  /* width: 40%; */
+  background-color: antiquewhite;
+  display: inline-block;
+  margin: 0px 8px;
+  /* justify-content: space-evenly; */
 }
 
 .table-form {
-  display: flex;
-  gap: 5px;
+  /* display: flex; */
+  /* gap: 5px; */
+  margin: 20px 0px;
 }
 
 .table-form * {
   font-size: 18px;
+  margin: auto;
+}
+
+.add-form {
+  display: table;
+  margin: auto;
+}
+
+.add-form h2 {
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.add-form form * {
+  font-size: 18px;
+  margin-right: 20px;
 }

@@ -203,7 +203,7 @@ const Employees = () => {
                 <table>
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Address</th>
                             <th>Email</th>
@@ -217,7 +217,8 @@ const Employees = () => {
                     <tbody>
                         {contacts.map(contact => 
                             <Fragment>
-                                { editContactId === contact.id ? 
+                                { 
+                                editContactId === contact.id ? 
                                 <EmployeesEditableRow contact={contact} editFormData={editFormData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick} key={contact.id}/> : 
                                 <EmployeesReadableRow contact={contact} handleEditClick={handleEditClick} handleDeleteClick={handleDeleteClick} key={contact.id}/>
                                 }
@@ -227,21 +228,23 @@ const Employees = () => {
                 </table>
             </form>
 
-            <h2>Add a row</h2>
-            <form onSubmit={handleAddFormSubmit} className="table-form">
-                <input type="text" name="name" placeholder="Name" onChange={handleAddFormChange} required/>
-                <input type="text" name="address" placeholder="Address" onChange={handleAddFormChange} required/>
-                <input type="email" name="email" placeholder="Email" onChange={handleAddFormChange} required/>
-                <input type="date" name="hire_date" placeholder="Hiring Date" onChange={handleAddFormChange} required/>
-                <input type="number" name="salary" placeholder="Salary" onChange={handleAddFormChange} required/>
-                <input type="text" name="job_title" placeholder="Job Title" onChange={handleAddFormChange} required/>
-                <input type="number" name="project_id" placeholder="Project Id" onChange={handleAddFormChange}/>
-                <button type="submit">Add</button>
-            </form>
+            <div className="add-form">
+                <h2>Add a row</h2>
+                <form onSubmit={handleAddFormSubmit}>
+                    <input type="text" name="name" placeholder="Name" onChange={handleAddFormChange} required/>
+                    <input type="text" name="address" placeholder="Address" onChange={handleAddFormChange} required/>
+                    <input type="email" name="email" placeholder="Email" onChange={handleAddFormChange} required/>
+                    <input type="date" name="hire_date" placeholder="Hiring Date" onChange={handleAddFormChange} required/>
+                    <input type="number" name="salary" placeholder="Salary" onChange={handleAddFormChange} required/>
+                    <input type="text" name="job_title" placeholder="Job Title" onChange={handleAddFormChange} required/>
+                    <input type="number" name="project_id" placeholder="Project Id" onChange={handleAddFormChange}/>
+                    <button type="submit">Add</button>
+                </form>
+            </div>
             
             <form onSubmit={handleLogoutSubmit}>
                 <div>
-                    <button type="submit">Log Out</button>
+                    <button type="submit" className="center-horizontally">Log Out</button>
                 </div>
             </form>
         </div>

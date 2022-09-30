@@ -1,5 +1,6 @@
 const db = require("../init");
 const Employees = db.employees;
+const Projects = db.projects;
 
 // Retrieve all Employees from the database
 exports.findAll = (req, res) => { 
@@ -32,8 +33,8 @@ exports.findAll = (req, res) => {
   };
   
   // Insert a new Employee
-  exports.create = (req, res) => {
-    req.body.project_id = parseInt(req.body.project_id) || null;
+  exports.create = async(req, res) => {
+    const projectId = parseInt(req.body.project_id) || null;
 
     // Validate request
     if (!req.body.name) {
@@ -41,6 +42,7 @@ exports.findAll = (req, res) => {
         res.status(400).send({
             message: "Content can not be empty!"
         });
+
         return;
     };
   
@@ -52,29 +54,69 @@ exports.findAll = (req, res) => {
       hire_date: req.body.hire_date,
       salary: req.body.salary,
       job_title: req.body.job_title,
-      project_id: req.body.project_id
+      project_id: projectId
     };
-  
-    // Save Employee in the database
-    Employees.create(employee)
-    .then(data => {
-      res.send(data);
+
+    // Check if the project ID the employee will be linked to exists
+    const foundOne = await Projects.findOne({
+      where: {id: projectId}
     })
     .catch(err => {
-      res.status(500).send({
-        message: err.message || "Some error occurred while creating the Employee."
-      });
+        res.status(500).send({
+          message: err.message || "Some error occurred while retrieving projects."
+        });
     });
+
+    // Throw exception if the project ID doesn't exist and if it is not null (employee can have no project)
+    if (!foundOne && projectId) {
+      res.status(409).send({
+        message: `Project with id ${projectId} does not exist!`
+      });
+  
+      return;
+    }
+    // Save Employee in the database
+    else {
+      Employees.create(employee)
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: err.message || "Some error occurred while creating the Employee."
+        });
+      });
+    }  
   };
   
   // Update an Employee by the id in the request
-  exports.update = (req, res) => {
+  exports.update = async(req, res) => {
     const id = req.params.id;
-    req.body.project_id = parseInt(req.body.project_id) || null;
-  
-    Employees.update(req.body, {
-      where: { id: id }
+    const projectId = parseInt(req.body.project_id) || null;
+
+    // Check if the project ID the employee will be linked to exists
+    const foundOne = await Projects.findOne({
+      where: {id: projectId}
     })
+    .catch(err => {
+        res.status(500).send({
+          message: err.message || "Some error occurred while retrieving projects."
+        });
+    });
+
+    // Throw exception if the project ID doesn't exist and if it is not null (employee can have no project)
+    if (!foundOne && projectId) {
+      res.status(409).send({
+        message: `Project with id ${projectId} does not exist!`
+      });
+  
+      return;
+    }
+    // Update Employee
+    else {
+      Employees.update(req.body, {
+        where: { id: id }
+      })
       .then(num => {
         if (num == 1) {
           res.send({
@@ -91,6 +133,7 @@ exports.findAll = (req, res) => {
           message: `Error updating Employee with id ${id}`
         });
       });
+    }
   };
   
   // Delete an Employee with the specified id in the request
