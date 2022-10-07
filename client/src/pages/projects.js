@@ -182,53 +182,55 @@ const Projects = () => {
 
         localStorage.setItem('loggedIn', false);
         history.push("/");
+
+        alert("Succesful logout!");
     }
 
     return (
         <div>
             <Navbar />
-            <form onSubmit={handleEditFormSubmit} className="table-form">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Project Name</th>
-                            <th>Start Date</th>
-                            <th>Planned End Date</th>
-                            <th>Description</th>
-                            <th>Project Code</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {contacts.map(contact => 
-                            <Fragment>
-                                { editContactId === contact.id ? 
-                                <ProjectsEditableRow contact={contact} editFormData={editFormData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick} /> : 
-                                <ProjectsReadableRow contact={contact} handleEditClick={handleEditClick} handleDeleteClick={handleDeleteClick} />}
-                            </Fragment>
-                        )}
-                    </tbody>
-                </table>
-            </form>
+            <div className="center-horizontally">
+                <form onSubmit={handleEditFormSubmit} className="table-form">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Project Name</th>
+                                <th>Start Date</th>
+                                <th>Planned End Date</th>
+                                <th>Description</th>
+                                <th>Project Code</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {contacts.map(contact => 
+                                <Fragment>
+                                    { editContactId === contact.id ? 
+                                    <ProjectsEditableRow contact={contact} editFormData={editFormData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick} /> : 
+                                    <ProjectsReadableRow contact={contact} handleEditClick={handleEditClick} handleDeleteClick={handleDeleteClick} />}
+                                </Fragment>
+                            )}
+                        </tbody>
+                    </table>
+                </form>
 
-            <div className="add-form">
-                <h2>Add a row</h2>
-                <form onSubmit={handleAddFormSubmit}>
-                    <input type="text" name="project_name" placeholder="Enter a name." onChange={handleAddFormChange} required/>
-                    <input type="date" name="start_date" placeholder="Enter a date of start." onChange={handleAddFormChange} required/>
-                    <input type="date" name="planned_end_date" placeholder="Enter a date of end." onChange={handleAddFormChange} required/>
-                    <input type="text" name="description" placeholder="Enter a description." onChange={handleAddFormChange} required/>
-                    <input type="text" name="project_code" placeholder="Enter the code." onChange={handleAddFormChange} required/>
-                    <button type="submit">Add</button>
+                <div className="add-form">
+                    <h2>Add a row</h2>
+                    <form onSubmit={handleAddFormSubmit}>
+                        <input type="text" name="project_name" placeholder="Enter a name." onChange={handleAddFormChange} required/>
+                        <input type="date" name="start_date" placeholder="Enter a date of start." onChange={handleAddFormChange} required/>
+                        <input type="date" name="planned_end_date" placeholder="Enter a date of end." onChange={handleAddFormChange} required/>
+                        <input type="text" name="description" placeholder="Enter a description." onChange={handleAddFormChange} required/>
+                        <input type="text" name="project_code" placeholder="Enter the code." onChange={handleAddFormChange} required/>
+                        <button type="submit">Add</button>
+                    </form>
+                </div>
+                
+                <form onSubmit={handleLogoutSubmit} className="center-horizontally log-in-out">
+                    <button type="submit">Log Out</button>
                 </form>
             </div>
-            
-            <form onSubmit={handleLogoutSubmit}>
-                <div>
-                    <button type="submit" className="center-horizontally">Log Out</button>
-                </div>
-            </form>
         </div>
     )
 }

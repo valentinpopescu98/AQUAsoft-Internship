@@ -33,6 +33,10 @@ td {
   background-color: antiquewhite;
 } */
 
+form {
+  display: inline-block;
+}
+
 form td:last-child {
   white-space: nowrap;
 }
@@ -46,7 +50,7 @@ form td:last-child button {
 }
 
 .table-form {
-  /* display: flex; */
+  display: flex;
   /* gap: 5px; */
   margin: 20px 0px;
 }
@@ -59,6 +63,7 @@ form td:last-child button {
 .add-form {
   display: table;
   margin: auto;
+  /* margin: 20px 20px; */
 }
 
 .add-form h2 {

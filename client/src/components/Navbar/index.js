@@ -1,5 +1,7 @@
 import React from 'react'
-import { Nav, NavLink, NavMenu } from './NavbarElements';
+import { Nav } from './Nav';
+import { NavMenu } from './NavMenu';
+import { NavLink } from './NavLink';
 
 const Navbar = () => {
     return (

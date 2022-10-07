@@ -27,10 +27,17 @@ button {
 }
 
 .center-screen * {
-    /* margin-right: 10px; */
+    margin: 2px 0px;
 }
 
 .center-horizontally {
-    display: block;
+    width: 95%;
     margin: auto;
+    display: block;
+}
+
+.log-in-out {
+    display: grid;
+    width: 10%;
+    margin-top: 20px;
 }
