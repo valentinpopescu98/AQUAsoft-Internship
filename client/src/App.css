@@ -14,7 +14,8 @@ input {
 }
 
 button {
-    background-color: lavender;
+    background-color: thistle;
+    padding: 2px 4px;
 }
 
 .center-screen {
@@ -36,8 +37,10 @@ button {
     display: block;
 }
 
-.log-in-out {
+.log-out {
     display: grid;
-    width: 10%;
-    margin-top: 20px;
+    height: 50%;
+    transform: translateY(50%);
+    /* width: 8%; */
+    /* margin-top: 20px; */
 }

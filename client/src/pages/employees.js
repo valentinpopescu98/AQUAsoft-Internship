@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect, Fragment } from 'react';
 import Axios from "axios";
 import "./table.css";
 import EmployeesReadableRow from '../components/Employees/EmployeesReadableRow';
@@ -189,15 +189,6 @@ const Employees = () => {
         deleteContact(contactId);
     }
 
-    const handleLogoutSubmit = (event) => {
-        event.preventDefault();
-
-        localStorage.setItem('loggedIn', false);
-        history.push("/");
-
-        alert("Succesful logout!");
-    }
-
     return (
         <div>
             <Navbar />
@@ -222,8 +213,8 @@ const Employees = () => {
                                 <Fragment>
                                     { 
                                     editContactId === contact.id ? 
-                                    <EmployeesEditableRow contact={contact} editFormData={editFormData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick} key={contact.id}/> : 
-                                    <EmployeesReadableRow contact={contact} handleEditClick={handleEditClick} handleDeleteClick={handleDeleteClick} key={contact.id}/>
+                                    <EmployeesEditableRow contact={contact} editFormData={editFormData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick} key={contact.id} /> : 
+                                    <EmployeesReadableRow contact={contact} handleEditClick={handleEditClick} handleDeleteClick={handleDeleteClick} key={contact.id} />
                                     }
                                 </Fragment>
                             )}
@@ -244,10 +235,6 @@ const Employees = () => {
                         <button type="submit">Add</button>
                     </form>
                 </div>
-                
-                <form onSubmit={handleLogoutSubmit} className="center-horizontally log-in-out">
-                    <button type="submit">Log Out</button>
-                </form>
             </div>
         </div>
     )

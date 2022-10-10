@@ -43,7 +43,7 @@ form td:last-child {
 
 form td:last-child button {
   /* width: 40%; */
-  background-color: antiquewhite;
+  /* background-color: antiquewhite; */
   display: inline-block;
   margin: 0px 8px;
   /* justify-content: space-evenly; */
