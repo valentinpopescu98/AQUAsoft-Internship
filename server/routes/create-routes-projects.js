@@ -36,7 +36,7 @@ exports.findOne = (req, res) => {
 // Insert a new Project
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.project_name) {
+    if (!req.body.name) {
         console.log(req.body);
         res.status(400).send({
             message: "Content can not be empty!"
@@ -47,11 +47,11 @@ exports.create = (req, res) => {
     // Create an Project
     const project = {
       id: req.body.id,
-      project_name: req.body.project_name,
+      name: req.body.name,
       start_date: req.body.start_date,
-      planned_end_date: req.body.planned_end_date,
+      end_date: req.body.end_date,
       description: req.body.description,
-      project_code: req.body.project_code
+      code: req.body.code
     };
 
     // Save Project in the database

@@ -7,7 +7,7 @@ const model = {
         notNull: true,
         autoIncrement: true
     },
-    project_name: {
+    name: {
          type: Sequelize.DataTypes.STRING(45),
         notNull: true
     },
@@ -15,7 +15,7 @@ const model = {
         type: Sequelize.DataTypes.DATE,
         notNull: true
     },
-    planned_end_date: {
+    end_date: {
         type: Sequelize.DataTypes.DATE,
         notNull: true
     },
@@ -23,7 +23,7 @@ const model = {
         type: Sequelize.DataTypes.STRING(255),
         notNull: true
     },
-    project_code: {
+    code: {
         type: Sequelize.DataTypes.STRING(255),
         notNull: true
     }

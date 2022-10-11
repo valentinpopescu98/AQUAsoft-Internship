@@ -35,20 +35,33 @@ exports.findAll = (req, res) => {
   // Insert a new Employee
   exports.create = async(req, res) => {
     const projectId = parseInt(req.body.project_id) || null;
+    const name = req.body.name;
 
-    // Validate request
-    if (!req.body.name) {
+    // Check if name is empty
+    if (!name) {
         console.log(req.body);
-        res.status(400).send({
-            message: "Content can not be empty!"
+
+        res.status(409).send({
+            message: "Employee name can not be empty!"
         });
 
         return;
     };
+
+    // Check if project name is empty
+    if (!name) {
+      console.log(req.body);
+
+      res.status(409).send({
+          message: "Project name can not be empty!"
+      });
+
+      return;
+  };
   
     // Create an Employee
     const employee = {
-      name: req.body.name,
+      name: name,
       address: req.body.address,
       email: req.body.email,
       hire_date: req.body.hire_date,

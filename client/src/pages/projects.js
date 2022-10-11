@@ -11,19 +11,19 @@ const Projects = () => {
 
     const [contacts, setContacts] = useState([]);
     const [addFormData, setAddFormData] = useState({
-        project_name: '',
+        name: '',
         start_date: '',
-        planned_end_date: '',
+        end_date: '',
         description: '',
-        project_code: ''
+        code: ''
     });
 
     const [editFormData, setEditFormData] = useState({
-        project_name: '',
+        name: '',
         start_date: '',
-        planned_end_date: '',
+        end_date: '',
         description: '',
-        project_code: ''
+        code: ''
     });
 
     const [editContactId, setEditContactId] = useState(null);
@@ -36,7 +36,7 @@ const Projects = () => {
         Axios.get("http://localhost:8080/api/projects").then((res) => {
             for (let i = 0; i < res.data.length; i++) {
                 res.data[i].start_date = res.data[i].start_date.slice(0, 10);
-                res.data[i].planned_end_date = res.data[i].planned_end_date.slice(0, 10);
+                res.data[i].end_date = res.data[i].end_date.slice(0, 10);
             }
 
             setContacts(res.data);
@@ -56,7 +56,7 @@ const Projects = () => {
             const newContact = res.data;
 
             newContact.start_date = newContact.start_date.slice(0, 10);
-            newContact.planned_end_date = newContact.planned_end_date.slice(0, 10);
+            newContact.end_date = newContact.end_date.slice(0, 10);
 
             const newContacts = [...contacts, newContact];
             setContacts(newContacts);
@@ -105,11 +105,11 @@ const Projects = () => {
         event.preventDefault();
 
         const newContact = {
-            project_name: addFormData.project_name,
+            name: addFormData.name,
             start_date: addFormData.start_date,
-            planned_end_date: addFormData.planned_end_date,
+            end_date: addFormData.end_date,
             description: addFormData.description,
-            project_code: addFormData.project_code
+            code: addFormData.code
         }
 
         const newContacts = [...contacts, newContact];
@@ -123,11 +123,11 @@ const Projects = () => {
 
         const editedContact = {
             id: editContactId,
-            project_name: editFormData.project_name,
+            name: editFormData.name,
             start_date: editFormData.start_date,
-            planned_end_date: editFormData.planned_end_date,
+            end_date: editFormData.end_date,
             description: editFormData.description,
-            project_code: editFormData.project_code
+            code: editFormData.code
         }
 
         const newContacts = [...contacts];
@@ -147,15 +147,15 @@ const Projects = () => {
         setEditContactId(contact.id);
 
         const startDateConverted = contact.start_date.slice(0, 10);
-        const endDateConverted = contact.planned_end_date.slice(0, 10);
+        const endDateConverted = contact.end_date.slice(0, 10);
 
         const formValues = {
             id: contact.id,
-            project_name: contact.project_name,
+            name: contact.name,
             start_date: startDateConverted,
-            planned_end_date: endDateConverted,
+            end_date: endDateConverted,
             description: contact.description,
-            project_code: contact.project_code
+            code: contact.code
         }
 
         setEditFormData(formValues);
@@ -186,11 +186,11 @@ const Projects = () => {
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Project Name</th>
+                                <th>Name</th>
                                 <th>Start Date</th>
                                 <th>Planned End Date</th>
                                 <th>Description</th>
-                                <th>Project Code</th>
+                                <th>Code</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -209,11 +209,11 @@ const Projects = () => {
                 <div className="add-form">
                     <h2>Add a row</h2>
                     <form onSubmit={handleAddFormSubmit}>
-                        <input type="text" name="project_name" placeholder="Enter a name." onChange={handleAddFormChange} required/>
+                        <input type="text" name="name" placeholder="Enter a name." onChange={handleAddFormChange} required/>
                         <input type="date" name="start_date" placeholder="Enter a date of start." onChange={handleAddFormChange} required/>
-                        <input type="date" name="planned_end_date" placeholder="Enter a date of end." onChange={handleAddFormChange} required/>
+                        <input type="date" name="end_date" placeholder="Enter a date of end." onChange={handleAddFormChange} required/>
                         <input type="text" name="description" placeholder="Enter a description." onChange={handleAddFormChange} required/>
-                        <input type="text" name="project_code" placeholder="Enter the code." onChange={handleAddFormChange} required/>
+                        <input type="text" name="code" placeholder="Enter the code." onChange={handleAddFormChange} required/>
                         <button type="submit">Add</button>
                     </form>
                 </div>

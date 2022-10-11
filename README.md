@@ -57,11 +57,11 @@ The "Projects" table will have the following structure:
 Name: Projects
 Columns / Fields:
 * Id
-* Project_name varchar(45)
+* Name varchar(45)
 * Start_date datetime
-* Planned_end_date datetime
+* End_date datetime
 * Description varchar(45)
-* Project_code varchar(45)
+* Code varchar(45)
 
 **Task 4:
 This task involves creating a React (+ Redux) application.**
