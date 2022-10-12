@@ -8,9 +8,6 @@
 table {
   border-collapse: collapse;
   width: 95%;
-  /* margin: auto;
-  margin-top: 20px;
-  margin-bottom: 20px; */
   border: 5px solid black;
 }
 
@@ -29,10 +26,6 @@ td {
   background-color: #cdebfd;
 }
 
-/* td input {
-  background-color: antiquewhite;
-} */
-
 form {
   display: inline-block;
 }
@@ -42,16 +35,12 @@ form td:last-child {
 }
 
 form td:last-child button {
-  /* width: 40%; */
-  /* background-color: antiquewhite; */
   display: inline-block;
   margin: 0px 8px;
-  /* justify-content: space-evenly; */
 }
 
 .table-form {
   display: flex;
-  /* gap: 5px; */
   margin: 20px 0px;
 }
 
@@ -63,7 +52,6 @@ form td:last-child button {
 .add-form {
   display: table;
   margin: auto;
-  /* margin: 20px 20px; */
 }
 
 .add-form h2 {

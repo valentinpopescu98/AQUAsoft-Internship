@@ -41,6 +41,4 @@ button {
     display: grid;
     height: 50%;
     transform: translateY(50%);
-    /* width: 8%; */
-    /* margin-top: 20px; */
 }
