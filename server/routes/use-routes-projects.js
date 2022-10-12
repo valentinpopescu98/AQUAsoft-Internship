@@ -9,9 +9,6 @@ module.exports = app => {
     // Retrieve all Projects
     router.get("/", auth, routes.findAll);
 
-    // Retrieve a single Employee by id with its Project
-    router.get("/:id", auth, routes.findOne);
-
     // Create a new Project
     router.post("/", auth, routes.create);
 

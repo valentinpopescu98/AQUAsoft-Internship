@@ -9,9 +9,6 @@ module.exports = app => {
     // Retrieve all Employees
     router.get("/", auth, routes.findAll);
 
-    // Retrieve a single Employee with name
-    router.get("/:name", auth, routes.findOne);
-
     // Create a new Employee
     router.post("/", auth, routes.create);
 

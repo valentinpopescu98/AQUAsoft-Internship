@@ -15,60 +15,156 @@ exports.findAll = (req, res) => {
     });
 };
 
-// Retrieve an Employee by id with its respective Project
-exports.findOne = (req, res) => {
-  const id = req.params.id;
-
-  Employees.findOne({
-    where: {id: id},
-    include: {model: Projects}
-  })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Error retrieving Employee with id=" + id
-      });
-    });
-};
-
 // Insert a new Project
 exports.create = (req, res) => {
-    // Validate request
-    if (!req.body.name) {
-        console.log(req.body);
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    };
+  const name = req.body.name;
+  const start_date = req.body.start_date;
+  const end_date = req.body.end_date;
+  const description = req.body.description;
+  const code = req.body.code;
 
-    // Create an Project
-    const project = {
-      id: req.body.id,
-      name: req.body.name,
-      start_date: req.body.start_date,
-      end_date: req.body.end_date,
-      description: req.body.description,
-      code: req.body.code
-    };
+  // Check if name is empty
+  if (!name) {
+    console.log(req.body);
 
-    // Save Project in the database
-    Projects.create(project)
-    .then(data => {
-        res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while creating the Project."
-            });
-        });
+    res.status(409).send({
+        message: "Name can not be empty!"
+    });
+
+    return;
+  };
+
+  // Check if start date is valid
+  if (!isValidDate(start_date)) {
+    res.status(409).send({
+        message: "Start date is invalid!"
+    });
+
+    return;
+  };
+
+  // Check if end date is valid
+  if (!isValidDate(end_date)) {
+    res.status(409).send({
+        message: "Planned end date is invalid!"
+    });
+
+    return;
+  };
+
+  if (!datesInOrder(start_date, end_date)) {
+    res.status(409).send({
+      message: "Start date is later than end date!"
+    });
+
+    return;
+  }
+
+  // Check if description is empty
+  if (!description) {
+    console.log(req.body);
+
+    res.status(409).send({
+        message: "Description can not be empty!"
+    });
+
+    return;
+  };
+
+  // Check if code is empty
+  if (!code) {
+    console.log(req.body);
+
+    res.status(409).send({
+        message: "Code can not be empty!"
+    });
+
+    return;
+  };
+
+  // Create an Project
+  const project = {
+    name: name,
+    start_date: start_date,
+    end_date: end_date,
+    description: description,
+    code: code
+  };
+
+  // Save Project in the database
+  Projects.create(project)
+  .then(data => {
+      res.send(data);
+      })
+      .catch(err => {
+          res.status(500).send({
+              message: err.message || "Some error occurred while creating the Project."
+          });
+      });
 };
 
 // Update an Project by the id in the request
 exports.update = (req, res) => {
   const id = req.params.id;
+
+  // Check if name is empty
+  if (!req.body.name) {
+    console.log(req.body);
+
+    res.status(409).send({
+        message: "Name can not be empty!"
+    });
+
+    return;
+  };
+
+  // Check if start date is valid
+  if (!isValidDate(req.body.start_date)) {
+    res.status(409).send({
+        message: "Start date is invalid!"
+    });
+
+    return;
+  };
+
+  // Check if end date is valid
+  if (!isValidDate(req.body.end_date)) {
+    res.status(409).send({
+        message: "Planned end date is invalid!"
+    });
+
+    return;
+  };
+
+  if (!datesInOrder(req.body.start_date, req.body.end_date)) {
+    res.status(409).send({
+      message: "Start date is later than end date!"
+    });
+
+    return;
+  }
+
+  // Check if description is empty
+  if (!req.body.description) {
+    console.log(req.body);
+
+    res.status(409).send({
+        message: "Description can not be empty!"
+    });
+
+    return;
+  };
+
+  // Check if code is empty
+  if (!req.body.code) {
+    console.log(req.body);
+
+    res.status(409).send({
+        message: "Code can not be empty!"
+    });
+
+    return;
+  };
 
   Projects.update(req.body, {
     where: { id: id }
@@ -115,3 +211,34 @@ exports.delete = (req, res) => {
       });
     });
 };
+
+function isValidDate(dateString) {
+  // Check date pattern
+  if (!dateString.match(/^\d{4}-\d{1,2}-\d{1,2}$/)) {
+    return false;
+  }
+
+  const parts = dateString.split("-");
+  const day = parseInt(parts[2]);
+  const month = parseInt(parts[1]);
+  const year = parseInt(parts[0]);
+
+  // Check the ranges of the month
+  if (month < 1 || month > 12) {
+    return false;
+  }
+
+  let months = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+
+  // Adjust for leap years
+  if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0)) {
+    months[1] = 29;
+  }
+
+  // Check the ranges of the day
+  return day > 0 && day <= months[month - 1];
+}
+
+function datesInOrder(date1, date2) {
+  return new Date(date1) <= new Date(date2);
+}

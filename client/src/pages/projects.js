@@ -62,18 +62,27 @@ const Projects = () => {
             setContacts(newContacts);
 
             alert("Succesful insert!");
+        })
+        .catch(err => {
+            alert(err.response.data.message);
         });
     }
 
     const editContact = (id, newContact) => {
         Axios.put(`http://localhost:8080/api/projects/${id}`, newContact).then(() => {
             alert("Succesful edit!");
+        })
+        .catch(err => {
+            alert(err.response.data.message);
         });
     }
 
     const deleteContact = (id) => {
         Axios.delete(`http://localhost:8080/api/projects/${id}`).then(() => {
             alert("Succesful delete!");
+        })
+        .catch(err => {
+            alert(err.response.data.message);
         });
     }
 
